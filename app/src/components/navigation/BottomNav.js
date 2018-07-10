@@ -7,4 +7,8 @@ import NewsPage from '../screens/NewsPage.js';
 export default BottomNav =  TabNavigator({
     Home: LandingPage,
     News: NewsPage,
-  });
+  } , {
+      tabBarPosition: 'bottom',
+      swipeEnabled: true
+  }
+);

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {View,Text} from 'react-native';
 import StorageService from '../../services/StorageService.js';
 
-class LandingPage extends Component {
+class NewsPage extends Component {
 
     constructor(props) {
         super(props);
@@ -34,7 +34,7 @@ class LandingPage extends Component {
         }
         else {return(
             <View>
-                <Text>Overview</Text>
+                <Text> News </Text>
                 {this.listArticles()}
             </View>
            

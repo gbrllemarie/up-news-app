@@ -1,14 +1,13 @@
 import React from 'react';
-import {TabNavigator} from 'react-navigation';
+import {createBottomTabNavigator} from 'react-navigation';
 
 import LandingPage from '../screens/LandingPage.js';
 import NewsPage from '../screens/NewsPage.js';
 
-export default BottomNav =  TabNavigator({
+export default BottomNav = createBottomTabNavigator({
     Home: LandingPage,
     News: NewsPage,
   } , {
-      tabBarPosition: 'bottom',
       swipeEnabled: true
   }
 );

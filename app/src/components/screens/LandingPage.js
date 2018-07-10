@@ -27,6 +27,7 @@ class LandingPage extends Component {
     }
 
     render() {
+        console.log(this);
         if (this.state.loading) {
             return(
                 <Text>Loading</Text>

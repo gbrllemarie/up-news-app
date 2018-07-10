@@ -34,7 +34,6 @@ class NewsPage extends Component {
         }
         else {return(
             <View>
-                <Text> News </Text>
                 {this.listArticles()}
             </View>
            

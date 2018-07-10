@@ -42,4 +42,4 @@ class NewsPage extends Component {
     }
 }
 
-export default LandingPage;
+export default NewsPage;

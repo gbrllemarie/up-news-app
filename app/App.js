@@ -5,13 +5,15 @@
  */
 
 import React, { Component } from 'react';
-import LandingPage from './src/components/screens/LandingPage.js';
+import {View} from 'react-native';
 
+import LandingPage from './src/components/screens/LandingPage.js';
+import BottomNav from './src/components/navigation/BottomNav.js';
 
 export default class App extends Component {
   render() {
     return (
-      <LandingPage/>
+      <BottomNav/>
     );
   }
 }

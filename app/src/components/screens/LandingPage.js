@@ -4,26 +4,42 @@ import StorageService from '../../services/StorageService.js';
 
 class LandingPage extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.storage = new StorageService();
+        this.state = {
+            loading: true,
+            articles : []
+        };
     }
 
-    componentDidMount() {
-        this.storage.getData();
+     componentDidMount() {
+         this.setState({loading: true});
+         this.storage.getData().then(()=> {
+             this.setState({loading: false, articles: this.storage.articles});
+         });
     }
+
+    
+    listArticles() {
+        return this.storage.articles.map((article)=> {
+            return( <Text key={article.guid}>{article.title.toString()}</Text>);
+          });
+    }
+
     render() {
-     //   var articlesItem = this.storage.articles.map((article)=> {
-       //     return( <Text>{article.title}</Text>);
-       // }); this is for printing titles
-       
-        return(
+        console.log(this);
+        if (this.state.loading) {
+            return(
+                <Text>Loading</Text>
+            );
+        }
+        else {return(
             <View>
-                <Text>TEST</Text>
-                
+                {this.listArticles()}
             </View>
            
-        );
+        );}
     }
 }
 

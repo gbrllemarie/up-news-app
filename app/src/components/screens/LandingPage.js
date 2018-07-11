@@ -1,25 +1,34 @@
 import React, { Component } from 'react';
-import {View,Text,StyleSheet,ScrollView,Modal,TouchableHighlight} from 'react-native';
+import {View,Text,StyleSheet,ScrollView,Modal,TouchableHighlight,ActivityIndicator} from 'react-native';
 import { Card, ListItem, Button, Icon } from 'react-native-elements';
-import StorageService from '../../services/StorageService.js';
+import moment from 'moment';
+// import StorageService from '../../services/StorageService.js';
 
 class LandingPage extends Component {
 
     constructor(props) {
         super(props);
-        this.storage = new StorageService();
+        // this.storage = new StorageService();
         this.state = {
             loading: true,
             articles : [],
-
         };
     }
 
      componentDidMount() {
-         this.setState({loading: true});
-         this.storage.getData().then(()=> {
-            this.setState({loading: false, articles: this.storage.articles});
-         });
+       
+        return fetch('https://api.rss2json.com/v1/api.json?rss_url=https://www.up.edu.ph/index.php/feed/')
+        .then((response) => response.json())
+        .then((responseJson) => {
+
+            this.setState({
+              loading: false,
+              articles: responseJson.items,
+            }, function(){});
+
+        })
+            .catch((error) =>{console.error(error);});
+
     }
 
     getThumbnail(art){
@@ -27,27 +36,42 @@ class LandingPage extends Component {
         if (art.thumbnail == ""){
             photourl = require('../../img/default.png')
         }else{
-            photourl = {uri : art.thumbnail}
+            photourl = {uri : art.thumbnail.replace("_thumbnail-150x150","")}
         }
         return photourl
     }
     
     listArticles() {
-        return this.storage.articles.map((article)=> {
+        return this.state.articles.map((article)=> {
             return(
                 <Card
                     key={article.guid}
                     image={this.getThumbnail(article)}>
-                    <Text style={{marginBottom: 10}}>
+                    <Text style={styles.articleTitle}>
                         {article.title.toString()}
                     </Text>
-                <Button
-                    rightIcon={{name: 'code'}}
-                    color='white'
-                    backgroundColor='#800000'
-                    fontFamily='Helvetica'
-                    buttonStyle={{borderRadius: 5, marginLeft: 0, marginRight: 0, marginBottom: 0}}
-                    title='Read more' />
+
+                    <Text style={styles.datecon}>
+                        {moment(article.pubDate.slice(0,10)).format('DD MMMM YYYY')}
+                    </Text>
+
+                    <View style={styles.butcon}>
+                        <Button
+                            icon ={{name: 'library-books', color:'#800000', size: 25}}
+                            backgroundColor='white'
+                            fontFamily='Helvetica'
+                            buttonStyle={{borderRadius: 5, marginLeft: 0, marginRight: 0, marginBottom: 0}}/>
+                        <Button
+                            icon={{name: 'bookmark', color:'#800000', size: 25}}
+                            backgroundColor='white'
+                            fontFamily='Helvetica'
+                            buttonStyle={{borderRadius: 5, marginLeft: 0, marginRight: 0, marginBottom: 0}}/>
+                        <Button
+                            icon={{name: 'share', color:'#800000', size: 25}}
+                            backgroundColor='white'
+                            fontFamily='Helvetica'
+                            buttonStyle={{borderRadius: 5, marginLeft: 0, marginRight: 0, marginBottom: 0}}/>
+                    </View>
                 </Card>
 
             );
@@ -55,10 +79,11 @@ class LandingPage extends Component {
     }
 
     render() {
-        console.log(this);
         if (this.state.loading) {
             return(
-                <Text>Loading</Text>
+                <View style={{flex: 1, padding: 50}}>
+                    <ActivityIndicator style={{justifyContent: 'center', alignItems: 'center', height: 80}}/>
+                </View>
            );
         }
         else {
@@ -84,13 +109,19 @@ const styles = StyleSheet.create({
         marginTop : 50,
         marginBottom : 50,
         marginLeft : 30,
-        marginRight : 30
+        marginRight : 30,
     },
 
     title: {
         fontFamily: 'Helvetica',
         fontSize: 30,
         color: '#800000'
+    },
+
+    articleTitle: {
+        fontFamily: 'Helvetica-Light',
+        fontSize: 20,
+        color: '#880000'
     },
 
     redUnderline: {
@@ -102,6 +133,26 @@ const styles = StyleSheet.create({
     cardcon: {
         marginTop: 20,
         marginBottom: 20
+    },
+
+    butcon: {
+        marginTop: 5,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'flex-end',
+    },
+
+    datecon: {
+        fontSize: 18,
+        fontFamily: 'Helvetica-Light',
+        color: '#1A1A1A',
+        marginTop: 8,
+        justifyContent: 'flex-end',
+        alignItems: 'flex-end'
+    },
+
+    buttons: {
+
     }
 
 })

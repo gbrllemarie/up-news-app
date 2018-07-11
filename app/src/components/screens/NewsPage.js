@@ -3,7 +3,13 @@ import {View,Text} from 'react-native';
 import StorageService from '../../services/StorageService.js';
 
 class NewsPage extends Component {
-
+    render() {
+        return(
+            <Text>
+                News
+            </Text>
+        );
+    }
     // constructor(props) {
     //     super(props);
     //     this.storage = new StorageService();

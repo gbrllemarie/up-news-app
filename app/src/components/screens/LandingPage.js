@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import {View,Text,StyleSheet,ScrollView,Modal,TouchableHighlight,ActivityIndicator} from 'react-native';
 import { Card, ListItem, Button, Icon } from 'react-native-elements';
 import moment from 'moment';
-// import StorageService from '../../services/StorageService.js';
+import StorageService from '../../services/StorageService.js';
 
 class LandingPage extends Component {
 
     constructor(props) {
         super(props);
-        // this.storage = new StorageService();
+       this.storage = new StorageService();
         this.state = {
             loading: true,
             articles : [],
@@ -17,17 +17,10 @@ class LandingPage extends Component {
 
      componentDidMount() {
        
-        return fetch('https://api.rss2json.com/v1/api.json?rss_url=https://www.up.edu.ph/index.php/feed/')
-        .then((response) => response.json())
-        .then((responseJson) => {
-
-            this.setState({
-              loading: false,
-              articles: responseJson.items,
-            }, function(){});
-
-        })
-            .catch((error) =>{console.error(error);});
+        this.setState({loading: true});
+        this.storage.getData().then(()=> {
+            this.setState({loading: false, articles: this.storage.articles});
+         });
 
     }
 

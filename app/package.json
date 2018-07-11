@@ -8,9 +8,18 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "moment": "^2.22.2",
     "react": "16.3.1",
     "react-native": "0.55.4",
+<<<<<<< HEAD
     "react-navigation": "^2.6.2"
+=======
+    "react-native-elements": "0.19.0",
+    "react-native-modal": "^6.4.0",
+    "react-native-vector-icons": "^4.6.0",
+    "react-navigation": "^2.6.2",
+    "react-navigation-material-bottom-tabs": "^0.3.0"
+>>>>>>> db8bf4cbf98dc4d723a7b399d94ccde2a87edb3a
   },
   "devDependencies": {
     "babel-jest": "23.2.0",

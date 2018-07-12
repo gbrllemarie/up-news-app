@@ -21,7 +21,7 @@ import ProfilesPage from '../screens/ProfilesPage.js';
          navigationOptions: {
              tabBarLabel: 'Announcements',
              tabBarIcon: ({tintColor}) => {return(<Icon type='ionicon' name={Platform.OS === 'ios' ? 'ios-megaphone-outline' : 'md-megaphone'} color={tintColor} size={24}/>);}
-             }
+             },
      },
      Breakthroughs: {
        screen: BreakthroughsPage,

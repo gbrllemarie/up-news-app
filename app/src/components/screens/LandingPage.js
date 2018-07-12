@@ -16,9 +16,8 @@ class LandingPage extends Component {
     }
 
      componentDidMount() {
-       
         this.setState({loading: true});
-        this.storage.getNews().then(()=> {
+        this.storage.getData('news').then(()=> {
             this.setState({loading: false, news: this.storage.news});
          });
 

@@ -14,25 +14,27 @@ import ProfilesPage from '../screens/ProfilesPage.js';
          navigationOptions: {
              tabBarLabel: 'News',
          tabBarIcon: ({tintColor}) => {return(<Icon type='ionicon' name={Platform.OS === 'ios' ? 'ios-paper-outline' : 'md-paper'} color={tintColor} size={24}/>);}
-      
          }
      },
      Announcements: {
          screen: AnnouncementsPage,
          navigationOptions: {
              tabBarLabel: 'Announcements',
+             tabBarIcon: ({tintColor}) => {return(<Icon type='ionicon' name={Platform.OS === 'ios' ? 'ios-megaphone-outline' : 'md-megaphone'} color={tintColor} size={24}/>);}
              }
      },
      Breakthroughs: {
        screen: BreakthroughsPage,
        navigationOptions: {
-        tabBarLabel: 'Breakthroughs',
+        tabBarLabel: 'Breakthroughs',    
+        tabBarIcon: ({tintColor}) => {return(<Icon type='ionicon' name={Platform.OS === 'ios' ? 'ios-bulb-outline' : 'md-bulb'} color={tintColor} size={24}/>);}
         }
      },
      Profiles: {
       screen: ProfilesPage,
       navigationOptions: {
        tabBarLabel: 'Profiles',
+       tabBarIcon: ({tintColor}) => {return(<Icon type='ionicon' name={Platform.OS === 'ios' ? 'ios-contacts-outline' : 'md-contacts'} color={tintColor} size={24}/>);}
        }
 
      }
@@ -43,7 +45,7 @@ import ProfilesPage from '../screens/ProfilesPage.js';
          tabBarVisible: true
      },
      tabBarOptions: {
-         activeTintColor: 'red',
+         activeTintColor:  '#800000',
          inactiveTintColor: 'grey'
     }
  });

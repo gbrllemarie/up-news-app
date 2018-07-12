@@ -5,7 +5,7 @@ import {createBottomTabNavigator} from 'react-navigation';
 import { Icon } from 'react-native-elements';
 
 import LandingPage from '../screens/LandingPage.js';
-import NewsPage from '../screens/NewsPage.js';
+import AnnouncementsPage from '../screens/AnnouncementsPage';
 
 
 // export default BottomNav = createBottomTabNavigator({
@@ -18,16 +18,16 @@ import NewsPage from '../screens/NewsPage.js';
 //             }
 //         }
 //     },
-//     News: {
-//         screen: NewsPage,
+//     Announcements: {
+//         screen: AnnouncementsPage,
 //         navigationOptions: {
-//             tabBarLabel: 'News',
+//             tabBarLabel: 'Announcements',
 //             }
 //         }
 //     }
 // }, {
 //     initialRouteName: 'Home',
-//     order: ['Home','News'],
+//     order: ['Home','Announcements'],
 //     navigationOptions: {
 //         tabBarVisible: true
 //     },
@@ -41,7 +41,7 @@ export default createBottomTabNavigator({
   LandingPage: {
     screen: LandingPage,
     icon: 'bookmark'},
-  NewsPage: { screen: NewsPage }
+  AnnouncementsPage: { screen: AnnouncementsPAge }
 }, {
   initialRouteName: 'LandingPage',
   activeTintColor: '#f0edf6',

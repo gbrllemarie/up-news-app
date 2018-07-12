@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import {View,Text} from 'react-native';
 import StorageService from '../../services/StorageService.js';
 
-class AnnouncementsPage extends Component {
+class BreakthroughsPage extends Component {
     render() {
         return(
             <Text>
-                Announcements
+                Breakthroughs
             </Text>
         );
     }
@@ -47,4 +47,4 @@ class AnnouncementsPage extends Component {
     // }
 }
 
-export default AnnouncementsPage;
+export default BreakthroughsPage;

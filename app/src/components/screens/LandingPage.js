@@ -11,15 +11,15 @@ class LandingPage extends Component {
        this.storage = new StorageService();
         this.state = {
             loading: true,
-            articles : [],
+            news : [],
         };
     }
 
      componentDidMount() {
        
         this.setState({loading: true});
-        this.storage.getData().then(()=> {
-            this.setState({loading: false, articles: this.storage.articles});
+        this.storage.getNews().then(()=> {
+            this.setState({loading: false, news: this.storage.news});
          });
 
     }
@@ -35,7 +35,7 @@ class LandingPage extends Component {
     }
     
     listArticles() {
-        return this.state.articles.map((article)=> {
+        return this.state.news.map((article)=> {
             return(
                 <Card
                     key={article.guid}

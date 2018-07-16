@@ -1,6 +1,6 @@
 import React from 'react';
 import {Platform} from 'react-native'
-import {StackNavigator, createBottomTabNavigator} from 'react-navigation';
+import {createStackNavigator, createBottomTabNavigator} from 'react-navigation';
 import { Icon } from 'react-native-elements';
 import LandingPage from '../screens/LandingPage.js';
 import AnnouncementsPage from '../screens/AnnouncementsPage';
@@ -9,7 +9,7 @@ import ProfilesPage from '../screens/ProfilesPage.js';
 import ArticleView from '../screens/ArticleView.js';
 import SavedPage from '../screens/SavedPage.js';
 
-export const NewsStack = StackNavigator({
+export const NewsStack = createStackNavigator({
     News: {
         screen: LandingPage,
     },

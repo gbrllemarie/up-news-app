@@ -52,7 +52,8 @@ class LandingPage extends Component {
                             icon ={{name: 'library-books', color:'#800000', size: 25}}
                             backgroundColor='white'
                             fontFamily='Helvetica'
-                            buttonStyle={{borderRadius: 5, marginLeft: 0, marginRight: 0, marginBottom: 0}}/>
+                            buttonStyle={{borderRadius: 5, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+                            onPress={()=>this.props.navigation.navigate('ArticleView')}/>
                         <Button
                             icon={{name: 'bookmark', color:'#800000', size: 25}}
                             backgroundColor='white'

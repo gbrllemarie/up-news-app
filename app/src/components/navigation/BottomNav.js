@@ -1,16 +1,26 @@
 import React from 'react';
 import {Platform} from 'react-native'
-import {createBottomTabNavigator} from 'react-navigation';
+import {StackNavigator, createBottomTabNavigator} from 'react-navigation';
 import { Icon } from 'react-native-elements';
 import LandingPage from '../screens/LandingPage.js';
 import AnnouncementsPage from '../screens/AnnouncementsPage';
 import BreakthroughsPage from '../screens/BreakthroughsPage.js';
 import ProfilesPage from '../screens/ProfilesPage.js';
+import ArticleView from '../screens/ArticleView.js';
 
-
+export const NewsStack = StackNavigator({
+    News: {
+        screen: LandingPage,
+    },
+    ArticleView: {
+        screen: ArticleView
+    }
+}, {
+    headerMode: 'none'
+});
  export default BottomNav = createBottomTabNavigator({
      Home: {
-         screen: LandingPage,
+         screen: NewsStack,
          navigationOptions: {
              tabBarLabel: 'News',
          tabBarIcon: ({tintColor}) => {return(<Icon type='ionicon' name={Platform.OS === 'ios' ? 'ios-paper-outline' : 'md-paper'} color={tintColor} size={24}/>);}
@@ -42,7 +52,7 @@ import ProfilesPage from '../screens/ProfilesPage.js';
      initialRouteName: 'Home',
      order: ['Home','Announcements','Breakthroughs','Profiles'],
      navigationOptions: {
-         tabBarVisible: true
+         tabBarVisible: true,
      },
      tabBarOptions: {
          activeTintColor:  '#800000',

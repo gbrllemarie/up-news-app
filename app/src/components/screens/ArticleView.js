@@ -1,0 +1,85 @@
+import React,{Component} from 'react';
+import {View,Text,Platform} from 'react-native';
+import EStyleSheet from 'react-native-extended-stylesheet';
+import {Button, Icon} from 'react-native-elements';
+
+class ArticleView extends Component {
+    render() {
+        const {goBack} = this.props.navigation;
+        return (
+            <View>
+                <Button
+                    icon = {Platform.OS === 'ios' ? {type:'ionicon', name:'ios-arrow-back-outline', color:'#800000',size:24} : {type:'ionicon', name:'md-arrow-back', color:'#424242',size:24}}
+                    onPress = {()=>goBack()}
+                    buttonStyle={{
+                        backgroundColor:'transparent',
+                        padding: 0,
+                        justifyContent: 'flex-start',
+                        marginLeft: 10
+                    }}
+                    containerViewStyle={{marginLeft:0}}
+                />
+                <View>
+                    <Text style={styles.categoryTitle}>CATEGORY</Text>
+                    <Text style={styles.articleTitle}>This is a long title wow yay tester long title</Text>
+                </View>
+                <View style={styles.articleMetaContainer}>
+                    <Text style={styles.articleMeta}>Publish Date</Text>
+                    <Icon type='entypo' name='dot-single' color='#7B7B7B'/>
+                    <Text style={styles.articleMeta}>Written by Author</Text>
+                </View>
+                <View style={styles.articleButtons}>
+                    <Button title='Save'
+                        icon={Platform.OS === 'ios' ? {type:'ionicon', name:'ios-bookmark-outline', color:'#800000'} : {type:'ionicon', name:'md-bookmark', color:'#800000'}}
+                        buttonStyle={styles.buttonStyle}
+                        textStyle={styles.buttonText}
+                        containerViewStyle={{marginLeft:0}}
+                    />
+                    <Button title='Share'
+                        icon={Platform.OS === 'ios' ? {type:'ionicon', name:'ios-share-outline', color:'#800000'} : {type:'ionicon', name:'md-share-alt', color:'#800000'}}
+                        buttonStyle={styles.buttonStyle}
+                        textStyle={styles.buttonText}
+                        containerViewStyle={{marginLeft:0}}
+                    />
+                </View>
+            </View>
+        );
+    }
+}
+
+export default ArticleView;
+
+const styles = EStyleSheet.create({
+    categoryTitle:{
+        color: '#800000',
+        fontSize:'1rem',
+        fontWeight: 'bold'
+    },
+    articleTitle: {
+        fontSize: '1.25rem',
+        fontWeight: 'bold',
+        color: '#424242'
+    },
+    articleMetaContainer: {
+        flexDirection: 'row'
+    },
+    articleMeta: {
+        color: '#7B7B7B',
+        fontSize: '1rem'
+    },
+    articleButtons: {
+        flexDirection: 'row'
+    },
+    buttonText: {
+        color: '#800000',
+        fontSize:'1rem'
+    },
+    buttonStyle: { 
+        backgroundColor: 'transparent',
+        borderColor: '#800000',
+        borderWidth: 2,
+        borderRadius: 4,
+        paddingVertical: 3,
+        paddingHorizontal:8
+    }
+});

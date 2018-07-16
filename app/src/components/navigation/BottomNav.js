@@ -7,6 +7,7 @@ import AnnouncementsPage from '../screens/AnnouncementsPage';
 import BreakthroughsPage from '../screens/BreakthroughsPage.js';
 import ProfilesPage from '../screens/ProfilesPage.js';
 import ArticleView from '../screens/ArticleView.js';
+import SavedPage from '../screens/SavedPage.js';
 
 export const NewsStack = StackNavigator({
     News: {
@@ -47,10 +48,20 @@ export const NewsStack = StackNavigator({
        tabBarIcon: ({tintColor}) => {return(<Icon type='ionicon' name={Platform.OS === 'ios' ? 'ios-contacts-outline' : 'md-contacts'} color={tintColor} size={24}/>);}
        }
 
-     }
+     },
+     Saved: {
+        screen: SavedPage,
+        navigationOptions: {
+         tabBarLabel: 'Saved',
+         tabBarIcon: ({tintColor}) => {return(<Icon type='ionicon' name={Platform.OS === 'ios' ? 'ios-bookmark-outline' : 'md-bookmark'} color={tintColor} size={24}/>);}
+         }
+  
+       }
+
+     
  }, {
      initialRouteName: 'Home',
-     order: ['Home','Announcements','Breakthroughs','Profiles'],
+     order: ['Home','Announcements','Breakthroughs','Profiles','Saved'],
      navigationOptions: {
          tabBarVisible: true,
      },

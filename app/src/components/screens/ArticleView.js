@@ -3,13 +3,16 @@ import {View,Text,Platform,ScrollView,Dimensions} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Button, Icon} from 'react-native-elements';
 import HTML from 'react-native-render-html';
-
+import moment from 'moment';
 
 class ArticleView extends Component {
     render() {
         const {goBack} = this.props.navigation;
         const content = this.props.navigation.getParam('content','no content');
         const width = Dimensions.get('window').width;
+        const pubDate = this.props.navigation.getParam('pubDate')
+        const categories = this.props.navigation.getParam('categories')
+
         return (
             <ScrollView>
                 <Button
@@ -24,13 +27,13 @@ class ArticleView extends Component {
                     containerViewStyle={{marginLeft:0}}
                 />
                 <View>
-                    <Text style={styles.categoryTitle}>CATEGORY</Text>
+                    <Text style={styles.categoryTitle}>{categories[0]}</Text>
                     <Text style={styles.articleTitle}>{this.props.navigation.getParam('title')}</Text>
                 </View>
                 <View style={styles.articleMetaContainer}>
-                    <Text style={styles.articleMeta}>Publish Date</Text>
+                    <Text style={styles.articleMeta}>{moment(pubDate.slice(0,10)).format('DD MMMM YYYY')}</Text>
                     <Icon type='entypo' name='dot-single' color='#7B7B7B'/>
-                    <Text style={styles.articleMeta}>Written by Author</Text>
+                    <Text style={styles.articleMeta}>Written by {this.props.navigation.getParam('author')}</Text>
                 </View>
                 <View style={styles.articleButtons}>
                     <Button title='Save'
@@ -47,7 +50,13 @@ class ArticleView extends Component {
                     />
                     
                 </View>
-                <HTML html={content} imagesMaxWidth={width} staticContentMaxWidth={width} debug={true} />          
+                <HTML 
+                    html={content} 
+                    imagesMaxWidth={width} 
+                    staticContentMaxWidth={width} 
+                    debug={true} 
+                    
+                />          
             </ScrollView>
         );
     }

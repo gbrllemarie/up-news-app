@@ -1,13 +1,17 @@
 import React,{Component} from 'react';
-import {View,Text,Platform} from 'react-native';
+import {View,Text,Platform,ScrollView,Dimensions} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Button, Icon} from 'react-native-elements';
+import HTML from 'react-native-render-html';
+
 
 class ArticleView extends Component {
     render() {
         const {goBack} = this.props.navigation;
+        const content = this.props.navigation.getParam('content','no content');
+        const width = Dimensions.get('window').width;
         return (
-            <View>
+            <ScrollView>
                 <Button
                     icon = {Platform.OS === 'ios' ? {type:'ionicon', name:'ios-arrow-back-outline', color:'#800000',size:24} : {type:'ionicon', name:'md-arrow-back', color:'#424242',size:24}}
                     onPress = {()=>goBack()}
@@ -41,8 +45,10 @@ class ArticleView extends Component {
                         textStyle={styles.buttonText}
                         containerViewStyle={{marginLeft:0}}
                     />
+                    
                 </View>
-            </View>
+                <HTML html={content} imagesMaxWidth={width} staticContentMaxWidth={width} debug={true} />          
+            </ScrollView>
         );
     }
 }

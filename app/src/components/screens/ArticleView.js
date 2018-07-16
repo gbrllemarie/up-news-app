@@ -21,7 +21,7 @@ class ArticleView extends Component {
                 />
                 <View>
                     <Text style={styles.categoryTitle}>CATEGORY</Text>
-                    <Text style={styles.articleTitle}>This is a long title wow yay tester long title</Text>
+                    <Text style={styles.articleTitle}>{this.props.navigation.getParam('title')}</Text>
                 </View>
                 <View style={styles.articleMetaContainer}>
                     <Text style={styles.articleMeta}>Publish Date</Text>

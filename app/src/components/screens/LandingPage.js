@@ -53,7 +53,7 @@ class LandingPage extends Component {
                             backgroundColor='white'
                             fontFamily='Helvetica'
                             buttonStyle={{borderRadius: 5, marginLeft: 0, marginRight: 0, marginBottom: 0}}
-                            onPress={()=>this.props.navigation.navigate('ArticleView')}/>
+                            onPress={()=>this.props.navigation.navigate('ArticleView',article)}/>
                         <Button
                             icon={{name: 'bookmark', color:'#800000', size: 25}}
                             backgroundColor='white'

@@ -1,11 +1,22 @@
 import React,{Component} from 'react';
-import {View,Text,Platform,ScrollView,Dimensions} from 'react-native';
+import {View,Text,Platform,ScrollView,Dimensions,Share} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Button, Icon} from 'react-native-elements';
 import HTML from 'react-native-render-html';
 import moment from 'moment';
 
 class ArticleView extends Component {
+
+    onClick() {
+        Share.share({
+            title: `${this.props.navigation.getParam('title')}`,
+            url: `${this.props.navigation.getParam('guid')}`
+
+        }, {
+            dialogTitle: 'Share UP Article'
+        });
+    }
+
     render() {
         const {goBack} = this.props.navigation;
         const content = this.props.navigation.getParam('content','no content');
@@ -47,6 +58,7 @@ class ArticleView extends Component {
                         buttonStyle={styles.buttonStyle}
                         textStyle={styles.buttonText}
                         containerViewStyle={{marginLeft:0}}
+                        onPress={()=>{this.onClick()}}
                     />
                     
                 </View>

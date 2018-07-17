@@ -55,7 +55,11 @@ class ArticleView extends Component {
                     imagesMaxWidth={width} 
                     staticContentMaxWidth={width} 
                     debug={true} 
-                    
+                    textSelectable={true}
+                    baseFontStyle={{
+                        fontSize: 14,
+                        color: '#454545'
+                    }}
                 />          
             </ScrollView>
         );

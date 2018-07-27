@@ -1,0 +1,27 @@
+{
+  "name": "up-news-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "express": "^4.16.3",
+    "react": "^16.4.1",
+    "react-native": "^0.55.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gbrllemarie/up-news-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gbrllemarie/up-news-app/issues"
+  },
+  "homepage": "https://github.com/gbrllemarie/up-news-app#readme"
+}

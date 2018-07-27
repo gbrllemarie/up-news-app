@@ -13,14 +13,15 @@ class ArticleView extends Component {
             url: `${this.props.navigation.getParam('guid')}`
 
         }, {
-            dialogTitle: 'Share UP Article'
+            dialogTitle: 'Share UP Article',
+            subject: 'UP Article'
         });
     }
 
     render() {
+        const Dimensions = require('Dimensions')
         const {goBack} = this.props.navigation;
         const content = this.props.navigation.getParam('content','no content');
-        const width = Dimensions.get('window').width;
         const pubDate = this.props.navigation.getParam('pubDate')
         const categories = this.props.navigation.getParam('categories')
 
@@ -33,7 +34,8 @@ class ArticleView extends Component {
                         backgroundColor:'transparent',
                         padding: 0,
                         justifyContent: 'flex-start',
-                        marginLeft: 10
+                        marginLeft: 10,
+                        paddingVertical: 10
                     }}
                     containerViewStyle={{marginLeft:0}}
                 />
@@ -64,13 +66,20 @@ class ArticleView extends Component {
                 </View>
                 <HTML 
                     html={content} 
-                    imagesMaxWidth={width} 
-                    staticContentMaxWidth={width} 
-                    debug={true} 
+                    imagesMaxWidth={Dimensions.get('window').width}
+                    debug={true}
                     textSelectable={true}
                     baseFontStyle={{
                         fontSize: 14,
-                        color: '#454545'
+                        color: '#454545',
+                        textAlign: 'justify',
+                        lineHeight: 18
+                    }}
+                    tagsStyles={{
+                        p: {
+                            paddingHorizontal: 15,
+                            paddingVertical: 7
+                        }
                     }}
                 />          
             </ScrollView>

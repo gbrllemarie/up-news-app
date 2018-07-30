@@ -20,6 +20,9 @@ class ArticleView extends Component {
 
     render() {
         const Dimensions = require('Dimensions')
+        const w = Dimensions.get('window').width;
+        const h = parseInt(Dimensions.get('window').width * 0.5625);
+
         const {goBack} = this.props.navigation;
         const content = this.props.navigation.getParam('content','no content');
         const pubDate = this.props.navigation.getParam('pubDate')
@@ -62,26 +65,45 @@ class ArticleView extends Component {
                         containerViewStyle={{marginLeft:0}}
                         onPress={()=>{this.onClick()}}
                     />
-                    
                 </View>
-                <HTML 
+                <HTML
                     html={content} 
-                    imagesMaxWidth={Dimensions.get('window').width}
                     debug={true}
                     textSelectable={true}
                     baseFontStyle={{
-                        fontSize: 14,
+                        fontSize: 18,
                         color: '#454545',
                         textAlign: 'justify',
-                        lineHeight: 18
+                        lineHeight: 24
+                    }}
+                    renderers={{
+                        figcaption: () => { return null; }
                     }}
                     tagsStyles={{
                         p: {
-                            paddingHorizontal: 15,
-                            paddingVertical: 7
+                            paddingHorizontal: 36,
+                            paddingVertical: 8
+                        },
+                        figure: {
+                            paddingVertical: 12,
+                            width: w,
+                            maxWidth: w,
+                            height: h,
+                            maxHeight: h
+                        },
+                        img: {
+                            width: w,
+                            maxWidth: w,
+                            height: h,
+                            maxHeight: h
                         }
                     }}
-                />          
+                    classesStyles={{
+                        'attachment-thumbnail': {
+                            display: 'none'
+                        }
+                    }}
+                />
             </ScrollView>
         );
     }
@@ -90,17 +112,22 @@ class ArticleView extends Component {
 export default ArticleView;
 
 const styles = EStyleSheet.create({
-    categoryTitle:{
+    categoryTitle: {
+        paddingTop: 24,
+        paddingHorizontal: 36,
         color: '#800000',
         fontSize:'1rem',
         fontWeight: 'bold'
     },
     articleTitle: {
+        paddingVertical: 12,
+        paddingHorizontal: 36,
         fontSize: '1.25rem',
         fontWeight: 'bold',
         color: '#424242'
     },
     articleMetaContainer: {
+        paddingHorizontal: 36,
         flexDirection: 'row'
     },
     articleMeta: {
@@ -108,7 +135,10 @@ const styles = EStyleSheet.create({
         fontSize: '1rem'
     },
     articleButtons: {
-        flexDirection: 'row'
+        paddingVertical: 23,
+        paddingHorizontal: 36,
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
     },
     buttonText: {
         color: '#800000',

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View,Text,StyleSheet,ScrollView,Modal,TouchableHighlight,ActivityIndicator,TouchableOpacity} from 'react-native';
+import {View,Text,StyleSheet,ScrollView,Modal,TouchableHighlight,ActivityIndicator,TouchableOpacity,Share} from 'react-native';
 import { Card, ListItem, Button, Icon } from 'react-native-elements';
 import moment from 'moment';
 import StorageService from '../../services/StorageService.js';
@@ -21,6 +21,17 @@ class LandingPage extends Component {
             this.setState({loading: false, news: this.storage.news});
          });
 
+    }
+
+    onClick() {
+        Share.share({
+            title: `${this.props.navigation.getParam('title')}`,
+            url: `${this.props.navigation.getParam('guid')}`
+
+        }, {
+            dialogTitle: 'Share UP Article',
+            subject: 'UP Article'
+        });
     }
 
     getThumbnail(art){
@@ -59,7 +70,9 @@ class LandingPage extends Component {
                                 icon={{name: 'share', color:'#800000', size: 25}}
                                 backgroundColor='white'
                                 fontFamily='Helvetica'
-                                buttonStyle={{borderRadius: 5, marginLeft: 0, marginRight: 0, marginBottom: 0}}/>
+                                buttonStyle={{borderRadius: 5, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+                                onPress={()=>{this.onClick()}}
+                            />
                         </View>
                 </Card>
 

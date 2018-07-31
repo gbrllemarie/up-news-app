@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View,Text,StyleSheet,ScrollView,Modal,TouchableHighlight,ActivityIndicator} from 'react-native';
+import {View,Text,StyleSheet,ScrollView,Modal,TouchableHighlight,ActivityIndicator,TouchableOpacity} from 'react-native';
 import { Card, ListItem, Button, Icon } from 'react-native-elements';
 import moment from 'moment';
 import StorageService from '../../services/StorageService.js';
@@ -39,32 +39,28 @@ class LandingPage extends Component {
                 <Card
                     key={article.guid}
                     image={this.getThumbnail(article)}>
-                    <Text style={styles.articleTitle}>
+                    <TouchableOpacity onPress={()=>this.props.navigation.navigate('ArticleView',article)}>
+                        <Text style={styles.articleTitle}>
                         {article.title.toString()}
-                    </Text>
+                        </Text>
 
-                    <Text style={styles.datecon}>
-                        {moment(article.pubDate.slice(0,10)).format('DD MMMM YYYY')}
-                    </Text>
-
-                    <View style={styles.butcon}>
-                        <Button
-                            icon ={{name: 'library-books', color:'#800000', size: 25}}
-                            backgroundColor='white'
-                            fontFamily='Helvetica'
-                            buttonStyle={{borderRadius: 5, marginLeft: 0, marginRight: 0, marginBottom: 0}}
-                            onPress={()=>this.props.navigation.navigate('ArticleView',article)}/>
-                        <Button
-                            icon={{name: 'bookmark', color:'#800000', size: 25}}
-                            backgroundColor='white'
-                            fontFamily='Helvetica'
-                            buttonStyle={{borderRadius: 5, marginLeft: 0, marginRight: 0, marginBottom: 0}}/>
-                        <Button
-                            icon={{name: 'share', color:'#800000', size: 25}}
-                            backgroundColor='white'
-                            fontFamily='Helvetica'
-                            buttonStyle={{borderRadius: 5, marginLeft: 0, marginRight: 0, marginBottom: 0}}/>
-                    </View>
+                        <Text style={styles.datecon}>
+                            {moment(article.pubDate.slice(0,10)).format('DD MMMM YYYY')}
+                        </Text>
+                    </TouchableOpacity>
+                        <View style={styles.butcon}>
+                        
+                            <Button
+                                icon={{name: 'bookmark', color:'#800000', size: 25}}
+                                backgroundColor='white'
+                                fontFamily='Helvetica'
+                                buttonStyle={{borderRadius: 5, marginLeft: 0, marginRight: 0, marginBottom: 0}}/>
+                            <Button
+                                icon={{name: 'share', color:'#800000', size: 25}}
+                                backgroundColor='white'
+                                fontFamily='Helvetica'
+                                buttonStyle={{borderRadius: 5, marginLeft: 0, marginRight: 0, marginBottom: 0}}/>
+                        </View>
                 </Card>
 
             );

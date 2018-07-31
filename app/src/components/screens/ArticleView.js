@@ -4,10 +4,11 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import {Button, Icon} from 'react-native-elements';
 import HTML from 'react-native-render-html';
 import moment from 'moment';
+import 'react-native-fs';
 
 class ArticleView extends Component {
 
-    onClick() {
+    onClickShare() {
         Share.share({
             title: `${this.props.navigation.getParam('title')}`,
             url: `${this.props.navigation.getParam('guid')}`,
@@ -18,6 +19,11 @@ class ArticleView extends Component {
             subject: 'UP Article'
         });
     }
+
+    onClickSave() {
+        return
+    }
+
 
     render() {
         const Dimensions = require('Dimensions')
@@ -58,13 +64,15 @@ class ArticleView extends Component {
                         buttonStyle={styles.buttonStyle}
                         textStyle={styles.buttonText}
                         containerViewStyle={{marginLeft:0}}
+                        onPress={()=>{this.onClickSave()}}
+
                     />
                     <Button title='Share'
                         icon={Platform.OS === 'ios' ? {type:'ionicon', name:'ios-share-outline', color:'#800000'} : {type:'ionicon', name:'md-share-alt', color:'#800000'}}
                         buttonStyle={styles.buttonStyle}
                         textStyle={styles.buttonText}
                         containerViewStyle={{marginLeft:0}}
-                        onPress={()=>{this.onClick()}}
+                        onPress={()=>{this.onClickShare()}}
                     />
                 </View>
                 <HTML

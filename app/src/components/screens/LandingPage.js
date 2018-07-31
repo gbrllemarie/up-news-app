@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View,Text,StyleSheet,ScrollView,Modal,TouchableHighlight,ActivityIndicator,TouchableOpacity,Share} from 'react-native';
+import {View,Text,StyleSheet,ScrollView,Modal,TouchableHighlight,ActivityIndicator,TouchableOpacity,Share,Platform} from 'react-native';
 import { Card, ListItem, Button, Icon } from 'react-native-elements';
 import moment from 'moment';
 import StorageService from '../../services/StorageService.js';
@@ -26,7 +26,8 @@ class LandingPage extends Component {
     onClick() {
         Share.share({
             title: `${this.props.navigation.getParam('title')}`,
-            url: `${this.props.navigation.getParam('guid')}`
+            url: `${this.props.navigation.getParam('guid')}`,
+            message: `Check out this UP Article ${Platform.OS === 'android'? this.props.navigation.getParam('guid'): ''}`
 
         }, {
             dialogTitle: 'Share UP Article',

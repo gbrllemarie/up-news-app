@@ -10,7 +10,8 @@ class ArticleView extends Component {
     onClick() {
         Share.share({
             title: `${this.props.navigation.getParam('title')}`,
-            url: `${this.props.navigation.getParam('guid')}`
+            url: `${this.props.navigation.getParam('guid')}`,
+            message: `Check out this UP Article ${Platform.OS === 'android'? this.props.navigation.getParam('guid'): ''}`
 
         }, {
             dialogTitle: 'Share UP Article',

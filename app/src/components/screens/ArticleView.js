@@ -4,7 +4,9 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import {Button, Icon} from 'react-native-elements';
 import HTML from 'react-native-render-html';
 import moment from 'moment';
-import 'react-native-fs';
+
+var RNFS = require('react-native-fs');
+var path = RNFS.DocumentDirectoryPath +'/data.json'
 
 class ArticleView extends Component {
 
@@ -21,7 +23,15 @@ class ArticleView extends Component {
     }
 
     onClickSave() {
-        return
+        console.log(path)
+        console.log(this.props.navigation.state)
+        RNFS.writeFile(path, JSON.stringify(this.props.navigation.state.params), 'utf8')
+          .then((success) => {
+            console.log('FILE WRITTEN!');
+          })
+          .catch((err) => {
+            console.log(err.message);
+          });
     }
 
 

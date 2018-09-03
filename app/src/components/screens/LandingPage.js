@@ -1,26 +1,27 @@
 import React, { Component } from 'react';
-import {View,Text,StyleSheet,ScrollView,Modal,TouchableHighlight,ActivityIndicator,TouchableOpacity,Share,Platform} from 'react-native';
-import { Card, ListItem, Button, Icon } from 'react-native-elements';
+import { View, Text, StyleSheet, ScrollView, ActivityIndicator, TouchableOpacity, Share, Platform } from 'react-native';
+import { Card, Button } from 'react-native-elements';
 import moment from 'moment';
 import StorageService from '../../services/StorageService.js';
 
 class LandingPage extends Component {
-
     constructor(props) {
         super(props);
-       this.storage = new StorageService();
+        this.storage = new StorageService();
         this.state = {
             loading: true,
             news : [],
         };
     }
 
-     componentDidMount() {
+    componentDidMount() {
+        console.log(this.props);
+        this.category = this.props.navigation.state.key === 'Home' ? 'news' : this.props.navigation.state.key.toLowerCase();
+        console.log(this.category);
         this.setState({loading: true});
         this.storage.getData('news').then(()=> {
             this.setState({loading: false, news: this.storage.news});
          });
-
     }
 
     onClick() {
@@ -28,7 +29,6 @@ class LandingPage extends Component {
             title: `${this.props.navigation.getParam('title')}`,
             url: `${this.props.navigation.getParam('guid')}`,
             message: `Check out this UP Article ${Platform.OS === 'android'? this.props.navigation.getParam('guid'): ''}`
-
         }, {
             dialogTitle: 'Share UP Article',
             subject: 'UP Article'
@@ -107,7 +107,6 @@ class LandingPage extends Component {
 export default LandingPage;
 
 const styles = StyleSheet.create({
-
     maincon: {
         marginTop : 50,
         marginBottom : 50,
@@ -152,10 +151,5 @@ const styles = StyleSheet.create({
         marginTop: 8,
         justifyContent: 'flex-end',
         alignItems: 'flex-end'
-    },
-
-    buttons: {
-
     }
-
 })

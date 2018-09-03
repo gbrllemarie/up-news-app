@@ -4,20 +4,20 @@ import { Card, Button } from 'react-native-elements';
 import moment from 'moment';
 import StorageService from '../../services/StorageService.js';
 
-class LandingPage extends Component {
+class Announcements extends Component {
     constructor(props) {
         super(props);
         this.storage = new StorageService();
         this.state = {
             loading: true,
-            news : [],
+            announcements : [],
         };
     }
 
     componentDidMount() {
          this.setState({loading: true});
-        this.storage.getData('news').then(()=> {
-            this.setState({loading: false, news: this.storage.news});
+        this.storage.getData('announcements').then(()=> {
+            this.setState({loading: false, announcements: this.storage.announcements});
          });
     }
 
@@ -43,7 +43,7 @@ class LandingPage extends Component {
     }
     
     listArticles() {
-        return this.state.news.map((article)=> {
+        return this.state.announcements.map((article)=> {
             return(
                 <Card
                     key={article.guid}
@@ -89,7 +89,7 @@ class LandingPage extends Component {
         else {
             return(
                 <View style={styles.maincon}>
-                    <Text style={styles.title}>News</Text>
+                    <Text style={styles.title}>Announcements</Text>
                     <View style={styles.redUnderline} />
                     <ScrollView style={styles.cardcon}>
                         {this.listArticles()}
@@ -101,7 +101,7 @@ class LandingPage extends Component {
     }
 }
 
-export default LandingPage;
+export default Announcements;
 
 const styles = StyleSheet.create({
     maincon: {

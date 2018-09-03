@@ -6,7 +6,7 @@ class SavedPage extends Component {
     render() {
         return(
             <Text>
-                Breakthroughs
+                Saved
             </Text>
         );
     }

@@ -3,12 +3,42 @@ import { Platform } from 'react-native'
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 import { Icon } from 'react-native-elements';
 import LandingPage from '../screens/LandingPage.js';
+import Announcements from '../screens/Announcements.js';
+import Breakthroughs from '../screens/Breakthroughs.js';
+import Profiles from '../screens/Profiles.js';
 import ArticleView from '../screens/ArticleView.js';
 import SavedPage from '../screens/SavedPage.js';
 
 const NewsStack = createStackNavigator(
     {
         News: { screen: LandingPage },
+        ArticleView: { screen: ArticleView }
+    }, {
+        headerMode: 'none'
+    }
+);
+
+const AnnouncementsStack = createStackNavigator(
+    {
+        Announcements: { screen: Announcements },
+        ArticleView: { screen: ArticleView }
+    }, {
+        headerMode: 'none'
+    }
+);
+
+const BreakthroughsStack = createStackNavigator(
+    {
+        Breakthroughs: { screen: Breakthroughs },
+        ArticleView: { screen: ArticleView }
+    }, {
+        headerMode: 'none'
+    }
+);
+
+const ProfilesStack = createStackNavigator(
+    {
+        Profiles: { screen: Profiles },
         ArticleView: { screen: ArticleView }
     }, {
         headerMode: 'none'
@@ -26,7 +56,7 @@ export default BottomNav = createBottomTabNavigator(
             }
         },
         Announcements: {
-            screen: NewsStack,
+            screen: AnnouncementsStack,
             navigationOptions: {
                 category: 'announcements',
                 tabBarLabel: 'Announcements',
@@ -34,14 +64,14 @@ export default BottomNav = createBottomTabNavigator(
             },
         },
         Breakthroughs: {
-            screen: NewsStack,
+            screen: BreakthroughsStack,
             navigationOptions: {
                 tabBarLabel: 'Breakthroughs',
                 tabBarIcon: ({ tintColor }) => { return (<Icon type='ionicon' name={Platform.OS === 'ios' ? 'ios-bulb-outline' : 'md-bulb'} color={tintColor} size={24} />); }
             }
         },
         Profiles: {
-            screen: NewsStack,
+            screen: ProfilesStack,
             navigationOptions: {
                 tabBarLabel: 'Profiles',
                 tabBarIcon: ({ tintColor }) => { return (<Icon type='ionicon' name={Platform.OS === 'ios' ? 'ios-contacts-outline' : 'md-contacts'} color={tintColor} size={24} />); }

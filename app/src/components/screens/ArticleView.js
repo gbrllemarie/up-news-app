@@ -22,15 +22,84 @@ class ArticleView extends Component {
     }
 
     onClickSave() {
-        console.log(path)
-        console.log(this.props.navigation.state)
-        RNFS.writeFile(path, JSON.stringify(this.props.navigation.state.params), 'utf8')
-          .then((success) => {
-            console.log('FILE WRITTEN!');
-          })
-          .catch((err) => {
-            console.log(err.message);
-          });
+
+        // Existence of data.json
+        RNFS.exists(path)
+            .then(
+                (response) => {
+                    if (response == false){
+                        console.log("data.json does not exist.")
+                        RNFS.writeFile(path, "", 'utf8')
+                            .then(
+                                console.log("data.json has been created.")
+                            )
+
+                    }
+                    else{
+                        console.log("data.json exists.")
+
+                    }
+
+                    // Read data.json and get list of saved items.
+                    RNFS.readFile(path, 'utf8')
+                        .then(
+                            (response) => {
+
+                                // Get gid.
+                                var gid = this.props.navigation.state.params.guid.slice(-4)
+                                console.log("Reading list from data.json: ")
+                                console.log(response)
+                                var fileList = response.split("\n")
+                                fileList = fileList.filter(function(n){ return n != "" })
+                                console.log(fileList)
+
+                                // Update list.
+                                if (fileList.indexOf(gid) == -1){
+                                    
+                                    fileList.push(gid)
+                                    console.log("Updated file list: ")
+                                    console.log(fileList)
+
+                                    // Stringify list.
+                                    var fileString = ""
+                                    var i
+                                    var len = fileList.length
+                                    for (i = 0; i < len; i++){
+                                        if (fileList != "\n")
+                                            fileString += fileList[i]+"\n"
+                                    }
+
+                                    // Write to data.json.
+                                    RNFS.writeFile(path, fileString, 'utf8')
+                                        .then(
+                                            (response) => {
+                                                console.log("Written to data.json:")
+                                                console.log(fileString)
+                                            }
+                                        )
+
+                                    // Write to new file with gid as name.
+                                    RNFS.writeFile(RNFS.DocumentDirectoryPath+'/'+gid+'.json', JSON.stringify(this.props.navigation.state.params), 'utf8')
+                                        .then(
+                                            (success) => {
+                                                console.log('New file created for new article.');
+                                            }
+                                        )
+
+                                }
+                                else{
+                                    console.log("Already saved.")
+                                }
+
+                            }
+                        )
+
+
+
+                }
+            )
+
+
     }
 
     render() {

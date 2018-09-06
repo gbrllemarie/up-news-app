@@ -1,50 +1,44 @@
 import React, { Component } from 'react';
-import {View,Text} from 'react-native';
+import { View, Text, StyleSheet, ScrollView, ActivityIndicator, TouchableOpacity, Share, Platform } from 'react-native';
+import { Card, Button, List, ListItems } from 'react-native-elements';
+import moment from 'moment';
 import StorageService from '../../services/StorageService.js';
 
 class SavedPage extends Component {
-    render() {
-        return(
-            <Text>
-                Saved
-            </Text>
-        );
+   
+    // Fetch saved pages in constructor.
+    constructor(props) {
+        super(props);
+        this.storage = new StorageService();
+        this.state = {
+            loading: true,
+            news : [],
+        };
     }
-    // constructor(props) {
-    //     super(props);
-    //     this.storage = new StorageService();
-    //     this.state = {
-    //         loading: true,
-    //         articles : []
-    //     };
-    // }
 
-    //  componentDidMount() {
-    //      this.setState({loading: true});
-    //      this.storage.getData().then(()=> {
-    //          this.setState({loading: false, articles: this.storage.articles});
-    //      });
-    // }
-    
-    // listArticles() {
-    //     return this.storage.articles.map((article)=> {
-    //         return( <Text key={article.guid}>{article.title.toString()}</Text>);
-    //       });
-    // }
 
-    // render() {
-    //     if (this.state.loading) {
-    //         return(
-    //             <Text>Loading</Text>
-    //         );
-    //     }
-    //     else {return(
-    //         <View>
-    //             {this.listArticles()}
-    //         </View>
-           
-    //     );}
-    // }
+    render() {
+        if (global.fetching) {
+            return(
+                <View style={{flex: 1, padding: 50}}>
+                    <ActivityIndicator style={{justifyContent: 'center', alignItems: 'center', height: 80}}/>
+                </View>
+           );
+        }
+        else {
+            return(
+                <View style={global.styles.maincon}>
+                    <Text style={global.styles.title}>Profiles</Text>
+                    <View style={global.styles.redUnderline} />
+                    <ScrollView style={global.styles.cardcon}>
+                        {this.listSavedPages()}
+                    </ScrollView>
+                </View>
+               
+            );
+        }
+    }
+
 }
 
 export default SavedPage;
